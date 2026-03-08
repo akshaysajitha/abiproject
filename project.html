@@ -751,17 +751,25 @@
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
         }
 
-        /* Responsive image area: 4:3 ratio on all sizes */
+        /* Responsive image area: square container so all aspect ratios fit */
         .prod-img-wrap {
             position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1 / 1;
             overflow: hidden;
+            background: #f4f4f4;
         }
 
         .prod-img-wrap .card-images {
             position: absolute;
             inset: 0;
+            background: #f4f4f4;
+        }
+
+        /* Show full image — no cropping */
+        .prod-img-wrap .card-images img {
+            object-fit: contain !important;
+            background: #f4f4f4;
         }
 
         .prod-details {
