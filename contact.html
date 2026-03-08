@@ -34,7 +34,7 @@
 
 <body>
     <!-- Topbar Start -->
-    <div class="container-fluid px-5 d-none d-lg-block">
+    <!-- <div class="container-fluid px-5 d-none d-lg-block">
         <div class="row gx-5">
             <div class="col-lg-4 text-center py-3">
                 <div class="d-inline-flex align-items-center">
@@ -64,43 +64,53 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Topbar End -->
 
 
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
-        <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand">
-                <h1 class="m-0 display-4 text-uppercase text-white"><i
-                        class="bi bi-building text-primary me-2"></i>WEBUILD</h1>
+        <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0 d-flex align-items-center">
+            <a href="index.html" class="navbar-brand d-flex align-items-center flex-grow-0">
+                <img src="img/generated-image.png" alt="Logo" class="me-3"
+                    style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                <div class="d-flex flex-column">
+                    <span class="text-uppercase text-white fw-bold"
+                        style="font-size: 1.4rem; line-height: 1.2; margin-bottom: -2px;">Sun cookwares
+                    </span>
+                    <small class="text-white-50 text-uppercase"
+                        style="font-size: 0.75rem; font-weight: 400;">Manufacturers</small>
+                </div>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" style="margin-left: auto;">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <!-- <a href="about.html" class="nav-item nav-link">About</a> -->
                     <a href="project.html" class="nav-item nav-link">Products</a>
-                    <!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+
+                    <!-- <a href="service.html" class="nav-item nav-link">Service</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
-                            <a href="project.html" class="dropdown-item">Our Project</a>
+                            <a href="project.html" class="dropdown-item">Our Product</a>
                             <a href="team.html" class="dropdown-item">The Team</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="testimonial.html" class="dropdown-item active">Testimonial</a>
                             <a href="blog.html" class="dropdown-item">Blog Grid</a>
                             <a href="detail.html" class="dropdown-item">Blog Detail</a>
                         </div>
                     </div> -->
-                    <!-- <a href="contact.html" class="nav-item nav-link active">Contact</a> -->
-                    <a href="" class="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">Get A Quote
-                        <i class="bi bi-arrow-right"></i></a>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+
                 </div>
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
+
 
 
     <!-- Page Header Start -->
@@ -176,41 +186,42 @@
             <div class="col-lg-7">
                 <div class="bg-white shadow-sm rounded-3 p-5">
                     <h4 class="text-uppercase fw-bold mb-4">Send Us A Message</h4>
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <!-- Access Key -->
-                        <input type="hidden" name="access_key" value="971fcb8a-1224-468d-8ec4-8c031b1082fd">
+                    <form id="contactForm">
+                        <!-- Access Key (sent via JS) -->
+                        <input type="hidden" id="cf-access-key" value="971fcb8a-1224-468d-8ec4-8c031b1082fd">
                         <!-- Honeypot Spam Protection -->
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Your Name</label>
-                                <input type="text" name="name" class="form-control border-0 bg-light"
+                                <input type="text" id="cf-name" class="form-control border-0 bg-light"
                                     placeholder="e.g. John Doe" style="height: 52px;" required>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Your Email</label>
-                                <input type="email" name="email" class="form-control border-0 bg-light"
+                                <input type="email" id="cf-email" class="form-control border-0 bg-light"
                                     placeholder="e.g. john@example.com" style="height: 52px;" required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Phone
                                     Number</label>
-                                <input type="tel" name="phone" class="form-control border-0 bg-light"
+                                <input type="tel" id="cf-phone" class="form-control border-0 bg-light"
                                     placeholder="e.g. +91 98765 43210" style="height: 52px;">
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Subject</label>
-                                <input type="text" name="subject" class="form-control border-0 bg-light"
+                                <input type="text" id="cf-subject" class="form-control border-0 bg-light"
                                     placeholder="How can we help?" style="height: 52px;">
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Message</label>
-                                <textarea name="message" class="form-control border-0 bg-light" rows="5"
+                                <textarea id="cf-message" class="form-control border-0 bg-light" rows="5"
                                     placeholder="Write your message here..." required></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold text-uppercase"
+                                <button type="button" id="cf-submit" onclick="submitContactForm()"
+                                    class="btn btn-primary w-100 py-3 fw-bold text-uppercase"
                                     style="letter-spacing: 1px;">
                                     <i class="fa fa-paper-plane me-2"></i> Send Message
                                 </button>
@@ -230,9 +241,16 @@
     <div class="footer container-fluid position-relative bg-dark bg-light-radial text-white-50 py-6 px-5">
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
-                <a href="index.html" class="navbar-brand">
-                    <h1 class="m-0 display-4 text-uppercase text-white"><i
-                            class="bi bi-building text-primary me-2"></i>WEBUILD</h1>
+                <a href="index.html" class="navbar-brand d-flex align-items-center flex-grow-0">
+                    <img src="img/generated-image.png" alt="Logo" class="me-3"
+                        style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                    <div class="d-flex flex-column">
+                        <span class="text-uppercase text-white fw-bold"
+                            style="font-size: 1.4rem; line-height: 1.2; margin-bottom: -2px;">Sun cookwares
+                        </span>
+                        <small class="text-white-50 text-uppercase"
+                            style="font-size: 0.75rem; font-weight: 400;">Manufacturers</small>
+                    </div>
                 </a>
                 <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam sed clita
                     dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
@@ -250,56 +268,10 @@
                             class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="col-lg-6 ps-lg-5">
-                <div class="row g-5">
-                    <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Quick Links</h4>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our
-                                Services</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The
-                                Team</a>
-                            <a class="text-white-50" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Popular Links</h4>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our
-                                Services</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The
-                                Team</a>
-                            <a class="text-white-50" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <h4 class="text-white text-uppercase mb-4">Newsletter</h4>
-                        <div class="w-100">
-                            <div class="input-group">
-                                <input type="text" class="form-control border-light" style="padding: 20px 30px;"
-                                    placeholder="Your Email Address"><button class="btn btn-primary px-4">Sign
-                                    Up</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
-    <div class="container-fluid bg-dark bg-light-radial text-white border-top border-primary px-0">
-        <div class="d-flex flex-column flex-md-row justify-content-between">
-            <div class="py-4 px-5 text-center text-md-start">
-                <p class="mb-0">&copy; <a class="text-primary" href="#">Your Site Name</a>. All Rights Reserved.</p>
-            </div>
-            <div class="py-4 px-5 bg-primary footer-shape position-relative text-center text-md-end">
-                <p class="mb-0">Designed by <a class="text-dark" href="https://htmlcodex.com">HTML Codex</a></p>
-            </div>
-        </div>
-    </div>
+
     <!-- Footer End -->
 
 
@@ -321,6 +293,82 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- ── Contact Success Modal ── -->
+    <div class="modal fade" id="contactSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:420px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden shadow-lg">
+                <div class="modal-body text-center p-5">
+                    <div
+                        style="width:70px;height:70px;background:linear-gradient(135deg,#22c55e,#16a34a);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(34,197,94,0.35);">
+                        <i class="bi bi-check-lg text-white" style="font-size:2rem;"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color:#0f172a;">Message Sent!</h5>
+                    <p class="text-muted mb-4" style="font-size:0.92rem;">Thank you for reaching out. Our team will get
+                        back to you within 24 hours.</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button class="btn btn-primary px-4 fw-bold" data-bs-dismiss="modal">OK</button>
+                        <button class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ── /Contact Success Modal ── -->
+
+    <script>
+        async function submitContactForm() {
+            var name = document.getElementById('cf-name').value.trim();
+            var email = document.getElementById('cf-email').value.trim();
+            var phone = document.getElementById('cf-phone').value.trim();
+            var subject = document.getElementById('cf-subject').value.trim();
+            var message = document.getElementById('cf-message').value.trim();
+            var key = document.getElementById('cf-access-key').value;
+
+            if (!name || !email || !message) {
+                alert('Please fill in your name, email, and message.');
+                return;
+            }
+
+            var btn = document.getElementById('cf-submit');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Sending...';
+
+            try {
+                var res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        access_key: key,
+                        name: name,
+                        email: email,
+                        phone: phone || 'N/A',
+                        subject: subject || 'Contact Form Enquiry',
+                        message: message
+                    })
+                });
+                var data = await res.json();
+                if (data.success) {
+                    // Reset form
+                    document.getElementById('cf-name').value = '';
+                    document.getElementById('cf-email').value = '';
+                    document.getElementById('cf-phone').value = '';
+                    document.getElementById('cf-subject').value = '';
+                    document.getElementById('cf-message').value = '';
+                    // Show success popup
+                    var modal = new bootstrap.Modal(document.getElementById('contactSuccessModal'));
+                    modal.show();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (e) {
+                alert('Network error. Please check your connection and try again.');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa fa-paper-plane me-2"></i> Send Message';
+        }
+    </script>
 </body>
 
 </html>
