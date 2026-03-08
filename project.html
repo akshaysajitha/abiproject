@@ -68,6 +68,7 @@
     <!-- Topbar End -->
 
 
+
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0 d-flex align-items-center">
@@ -76,7 +77,8 @@
                     style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                 <div class="d-flex flex-column">
                     <span class="text-uppercase text-white fw-bold"
-                        style="font-size: 1.4rem; line-height: 1.2; margin-bottom: -2px;">Sun cookwares
+                        style="font-size: 1.4rem; line-height: 1.2; margin-bottom: -2px;">
+                        <p style="font-size: 0.9rem; line-height: 1.2; margin-bottom: -2px;">Sun cookwares</p>
                     </span>
                     <small class="text-white-50 text-uppercase"
                         style="font-size: 0.75rem; font-weight: 400;">Manufacturers</small>
@@ -110,6 +112,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
+
 
 
 
@@ -805,11 +808,53 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
         }
 
+        /* ── Card Arrow Buttons ── */
+        .card-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.2s ease, background 0.2s ease;
+            padding: 0;
+        }
+
+        .prod-img-wrap:hover .card-arrow {
+            opacity: 1;
+        }
+
+        .card-arrow:hover {
+            background: rgba(0, 0, 0, 0.72);
+        }
+
+        .card-arrow-prev {
+            left: 7px;
+        }
+
+        .card-arrow-next {
+            right: 7px;
+        }
+
         /* Single column on small phones */
         @media (max-width: 480px) {
             #productGrid>div {
                 flex: 0 0 100%;
                 max-width: 100%;
+            }
+
+            .card-arrow {
+                opacity: 1;
             }
         }
 
@@ -1066,15 +1111,19 @@
             }
         }
 
-        // Image gallery switcher
+        // Image gallery switcher + arrow navigation
         (function () {
-            var portfolioCardIndexes = [0, 0, 0, 0, 0];
+            // Track current image index for each card (supports up to 10 cards)
+            var portfolioCardIndexes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
             window.showCardImage = function (cardIndex, imageIndex) {
                 var cardContainer = document.querySelector('[data-card="' + cardIndex + '"]');
                 if (!cardContainer) return;
                 var images = cardContainer.querySelectorAll('img');
                 var dots = cardContainer.parentElement.querySelectorAll('.card-dot');
+
+                // Clamp index
+                imageIndex = Math.max(0, Math.min(imageIndex, images.length - 1));
 
                 images.forEach(function (img) { img.style.opacity = '0'; img.classList.remove('active'); });
                 dots.forEach(function (d) { d.style.background = 'rgba(255,255,255,0.6)'; d.classList.remove('active'); });
@@ -1085,7 +1134,41 @@
                 portfolioCardIndexes[cardIndex] = imageIndex;
             };
 
+            // Navigate prev (-1) or next (+1) relative to current index
+            window.stepCardImage = function (cardIndex, direction) {
+                var cardContainer = document.querySelector('[data-card="' + cardIndex + '"]');
+                if (!cardContainer) return;
+                var total = cardContainer.querySelectorAll('img').length;
+                var current = portfolioCardIndexes[cardIndex] || 0;
+                var next = (current + direction + total) % total; // wraps around
+                window.showCardImage(cardIndex, next);
+            };
+
             window.updateSizeSelection = function () { };
+
+            // Auto-inject prev/next arrow buttons into every prod-img-wrap
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.prod-img-wrap').forEach(function (wrap) {
+                    var cardEl = wrap.querySelector('[data-card]');
+                    if (!cardEl) return;
+                    var idx = cardEl.getAttribute('data-card');
+
+                    var prev = document.createElement('button');
+                    prev.className = 'card-arrow card-arrow-prev';
+                    prev.setAttribute('aria-label', 'Previous image');
+                    prev.innerHTML = '<i class="bi bi-chevron-left"></i>';
+                    prev.addEventListener('click', function (e) { e.stopPropagation(); window.stepCardImage(+idx, -1); });
+
+                    var next = document.createElement('button');
+                    next.className = 'card-arrow card-arrow-next';
+                    next.setAttribute('aria-label', 'Next image');
+                    next.innerHTML = '<i class="bi bi-chevron-right"></i>';
+                    next.addEventListener('click', function (e) { e.stopPropagation(); window.stepCardImage(+idx, +1); });
+
+                    wrap.appendChild(prev);
+                    wrap.appendChild(next);
+                });
+            });
         })();
     </script>
 
